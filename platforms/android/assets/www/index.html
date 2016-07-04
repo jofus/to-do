@@ -19,7 +19,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+<html lang="en" ng-app="todoApp">
 
 <head>
     <meta charset="utf-8" />
@@ -39,17 +39,51 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
+    <title>Todo List | Joseph Scannell</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="angular.min"></script>
+
+<script src="todo.js"></script>
+<link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body id="newContent">
     <div class="app">
-        <h1>PhoneGap</h1>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
+        <div class="logo"><img src="img/logo.png"/></div>
+    <div class="wrapper">
+      <div ng-controller="TodoListController as todoList" class="todo">
+        <div class="content">
+          <h2>To-do</h2>
+
+          <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining
+          [ <a href="" ng-click="todoList.archive()">archive</a> ]</span>
+          <ul class="unstyled">
+            <li ng-repeat="todo in todoList.todos" class="todo-items">
+              <input type="checkbox" ng-model="todo.done">
+              <span class="done-{{todo.done}}">{{todo.text}}</span>
+            </li>
+          </ul>
+          <form ng-submit="todoList.addTodo()">
+            <input type="text" ng-model="todoList.todoText"  size="30"
+                   placeholder="add new todo here">
+            <input class="btn-primary" type="submit" value="add">
+          </form>
         </div>
+      <i></i>
+      </div>
     </div>
+  <i>Made with AngularJS</i>
+</div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
